@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http">
+<mapper namespace="com.shanweicode.mybatis.mappers.EmployeeMapper" >
+    <resultMap id="BaseResultMap" type="com.shanweicode.mybatis.bean.Employee" >
+        <id column="emp_id" property="empId" jdbcType="INTEGER" />
+        <result column="emp_name" property="empName" jdbcType="CHAR" />
+        <result column="emp_salary" property="empSalary" jdbcType="DOUBLE" />
+        <result column="emp_age" property="empAge" jdbcType="INTEGER" />
+        <result column="emp_gender" property="empGender" jdbcType="CHAR" />
+        <result column="emp_address" property="empAddress" jdbcType="CHAR" />
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+        emp_id, emp_name, emp_salary, emp_age, emp_gender, emp_address
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shanweicode.mybatis.bean.EmployeeExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_emp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from t_emp
+        where emp_id = #{empId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_emp
+        where emp_id = #{empId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.shanweicode.mybatis.bean.EmployeeExample" >
+        delete from t_emp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.shanweicode.mybatis.bean.Employee" >
+        insert into t_emp (emp_id, emp_name, emp_salary,
+                           emp_age, emp_gender, emp_address
+        )
+        values (#{empId,jdbcType=INTEGER}, #{empName,jdbcType=CHAR}, #{empSalary,jdbcType=DOUBLE},
+                #{empAge,jdbcType=INTEGER}, #{empGender,jdbcType=CHAR}, #{empAddress,jdbcType=CHAR}
+               )
+    </insert>
+    <insert id="insertSelective" parameterType="com.shanweicode.mybatis.bean.Employee" >
+        insert into t_emp
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="empId != null" >
+                emp_id,
+            </if>
+            <if test="empName != null" >
+                emp_name,
+            </if>
+            <if test="empSalary != null" >
+                emp_salary,
+            </if>
+            <if test="empAge != null" >
+                emp_age,
+            </if>
+            <if test="empGender != null" >
+                emp_gender,
+            </if>
+            <if test="empAddress != null" >
+                emp_address,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="empId != null" >
+                #{empId,jdbcType=INTEGER},
+            </if>
+            <if test="empName != null" >
+                #{empName,jdbcType=CHAR},
+            </if>
+            <if test="empSalary != null" >
+                #{empSalary,jdbcType=DOUBLE},
+            </if>
+            <if test="empAge != null" >
+                #{empAge,jdbcType=INTEGER},
+            </if>
+            <if test="empGender != null" >
+                #{empGender,jdbcType=CHAR},
+            </if>
+            <if test="empAddress != null" >
+                #{empAddress,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.shanweicode.mybatis.bean.EmployeeExample" resultType="java.lang.Integer" >
+        select count(*) from t_emp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_emp
+        <set >
+            <if test="record.empId != null" >
+                emp_id = #{record.empId,jdbcType=INTEGER},
+            </if>
+            <if test="record.empName != null" >
+                emp_name = #{record.empName,jdbcType=CHAR},
+            </if>
+            <if test="record.empSalary != null" >
+                emp_salary = #{record.empSalary,jdbcType=DOUBLE},
+            </if>
+            <if test="record.empAge != null" >
+                emp_age = #{record.empAge,jdbcType=INTEGER},
+            </if>
+            <if test="record.empGender != null" >
+                emp_gender = #{record.empGender,jdbcType=CHAR},
+            </if>
+            <if test="record.empAddress != null" >
+                emp_address = #{record.empAddress,jdbcType=CHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update t_emp
+        set emp_id = #{record.empId,jdbcType=INTEGER},
+        emp_name = #{record.empName,jdbcType=CHAR},
+        emp_salary = #{record.empSalary,jdbcType=DOUBLE},
+        emp_age = #{record.empAge,jdbcType=INTEGER},
+        emp_gender = #{record.empGender,jdbcType=CHAR},
+        emp_address = #{record.empAddress,jdbcType=CHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.shanweicode.mybatis.bean.Employee" >
+        update t_emp
+        <set >
+            <if test="empName != null" >
+                emp_name = #{empName,jdbcType=CHAR},
+            </if>
+            <if test="empSalary != null" >
+                emp_salary = #{empSalary,jdbcType=DOUBLE},
+            </if>
+            <if test="empAge != null" >
+                emp_age = #{empAge,jdbcType=INTEGER},
+            </if>
+            <if test="empGender != null" >
+                emp_gender = #{empGender,jdbcType=CHAR},
+            </if>
+            <if test="empAddress != null" >
+                emp_address = #{empAddress,jdbcType=CHAR},
+            </if>
+        </set>
+        where emp_id = #{empId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.shanweicode.mybatis.bean.Employee" >
+        update t_emp
+        set emp_name = #{empName,jdbcType=CHAR},
+            emp_salary = #{empSalary,jdbcType=DOUBLE},
+            emp_age = #{empAge,jdbcType=INTEGER},
+            emp_gender = #{empGender,jdbcType=CHAR},
+            emp_address = #{empAddress,jdbcType=CHAR}
+        where emp_id = #{empId,jdbcType=INTEGER}
+    </update>
+</mapper>

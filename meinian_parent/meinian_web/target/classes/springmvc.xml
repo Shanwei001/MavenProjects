@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans.xsd
+                  http://www.springframework.org/schema/mvc
+                  http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                  http://code.alibabatech.com/schema/dubbo
+                  http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+                  http://www.springframework.org/schema/context
+                  http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--开启注解驱动-->
+    <mvc:annotation-driven>
+        <!--加载json转换器-->
+        <mvc:message-converters register-defaults="true">
+            <!--项目使用vuejs中的axios异步访问数据，传递json数据，响应json数据-->
+            <!--不需要视图解析器，项目中的所有的请求都返回json数据结构
+            gson  fastjson
+            mime类型：多媒体类型
+            ajax:
+            MimeType:application/json text/html
+            <bean class="全路径名字">
+            -->
+
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes" value="application/json"/>
+                <property name="features">
+                    <list>
+                        <!--Map类型格式化，接收参数允许空值-->
+                        <value>WriteMapNullValue</value>
+                        <!--日期类型格式化-->
+                        <value>WriteDateUseDateFormat</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--指定dubbo应用程序的名字-->
+    <dubbo:application name="meinian_web"></dubbo:application>
+    <!--指定注册中心-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"></dubbo:registry>
+    <!--扫描web包，扫描controller-->
+    <dubbo:annotation package="com.shanweicode.controller"></dubbo:annotation>
+    <!--指定连接超时时间，启动时候不检查-->
+    <dubbo:consumer check="false" timeout="600000"></dubbo:consumer>
+    <!--指定上传解析器 多媒体解析器 上传图片，视频，音频-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- maxUploadSize文件大小 -->
+        <property name="maxUploadSize" value="104857600" />
+        <!-- maxInMemorySize：占用内存的大小
+        图片的大小：长 * 宽 * 颜色值(argb)
+        -->
+        <property name="maxInMemorySize" value="4096" />
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
+
+    <!-- 文件上传组件 -->
+<!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+<!--        <property name="maxUploadSize" value="104857600"/> &lt;!&ndash; 最大上传文件大小 &ndash;&gt;-->
+<!--        <property name="maxInMemorySize" value="4096"/>-->
+<!--        <property name="defaultEncoding" value="utf-8"/>-->
+<!--    </bean>-->
+
+    <!-- 导入redis配置文件 -->
+    <import resource="classpath:spring-redis.xml"></import>
+</beans>

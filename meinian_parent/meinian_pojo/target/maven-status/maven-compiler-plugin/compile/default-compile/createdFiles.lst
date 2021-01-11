@@ -1,0 +1,13 @@
+com/shanweicode/pojo/Permission.class
+com/shanweicode/pojo/TravelGroup.class
+com/shanweicode/pojo/Setmeal.class
+com/shanweicode/pojo/TravelItem.class
+com/shanweicode/entity/PageResult.class
+com/shanweicode/pojo/Role.class
+com/shanweicode/pojo/Order.class
+com/shanweicode/entity/QueryPageBean.class
+com/shanweicode/pojo/OrderSetting.class
+com/shanweicode/pojo/User.class
+com/shanweicode/pojo/Menu.class
+com/shanweicode/pojo/Member.class
+com/shanweicode/entity/Result.class

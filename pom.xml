@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>Dubbo01_customer</module>
+        <module>Dubbo01_provider</module>
+        <module>Maven01-MBG</module>
+        <module>Maven02-jedis</module>
+        <module>meinian_parent</module>
+        <module>quartz_demo</module>
+        <module>quartz_demo</module>
+    </modules>
+    <!-- 当前Maven工程的坐标 -->
+    <groupId>com.shanweicode</groupId>
+    <artifactId>MavenProjects</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <!-- 配置当前Maven工程所依赖的其他jar包 -->
+    <dependencies>
+        <dependency>
+            <!-- junit的坐标 -->
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <!-- 依赖的范围 -->
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+</project>

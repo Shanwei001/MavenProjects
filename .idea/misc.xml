@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/Dubbo01_customer" />
+    <file type="web" url="file://$PROJECT_DIR$/Dubbo01_provider" />
+    <file type="web" url="file://$PROJECT_DIR$/meinian_parent/meinian_jobs" />
+    <file type="web" url="file://$PROJECT_DIR$/meinian_parent/meinian_mobile_web" />
+    <file type="web" url="file://$PROJECT_DIR$/meinian_parent/meinian_service" />
+    <file type="web" url="file://$PROJECT_DIR$/meinian_parent/meinian_web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/Dubbo01_customer/pom.xml" />
+        <option value="$PROJECT_DIR$/Dubbo01_provider/pom.xml" />
+        <option value="$PROJECT_DIR$/Maven01-MBG/pom.xml" />
+        <option value="$PROJECT_DIR$/Maven02-jedis/pom.xml" />
+        <option value="$PROJECT_DIR$/meinian_common/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

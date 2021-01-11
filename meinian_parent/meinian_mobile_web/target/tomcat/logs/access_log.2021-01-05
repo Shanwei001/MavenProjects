@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [05/Jan/2021:19:16:01 +0800] "GET /pages/login.html HTTP/1.1" 200 4798 http-bio-80-exec-1 57
+0:0:0:0:0:0:0:1 - - [05/Jan/2021:19:16:11 +0800] "GET /plugins/elementui/fonts/element-icons.woff HTTP/1.1" 200 6164 http-bio-80-exec-3 10
